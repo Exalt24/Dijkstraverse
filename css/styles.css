@@ -1,0 +1,131 @@
+/* ============================= */
+/*   Variables & Base Styles     */
+/* ============================= */
+:root {
+    --bg-page:    #f4f7fa;
+    --bg-panel:   #ffffff;
+    --bg-cell:    #e8edf3;
+    --bg-wall:    #2c3e50;
+    --bg-visited: #a0d8ef;
+    --bg-path:    #f3c969;
+    --bg-start:   #2ecc71;
+    --bg-end:     #e74c3c;
+    --fg-default: #2d3436;
+    --border:     #d1d8e0;
+    --shadow-md:  0 4px 6px rgba(0,0,0,0.1);
+    --radius:     8px;
+    --gap:        4px;
+    --font:       'Segoe UI', Tahoma, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background: var(--bg-page);
+    font-family: var(--font);
+    color: var(--fg-default);
+}
+
+/* ============================= */
+/*   Control Panel Styling       */
+/* ============================= */
+#controls {
+    background: var(--bg-panel);
+    box-shadow: var(--shadow-md);
+    border-radius: var(--radius);
+    padding: 12px 16px;
+    margin: 12px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Styled Buttons */
+#controls button {
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s;
+}
+#controls button:hover {
+    background: var(--bg-cell);
+    box-shadow: var(--shadow-md);
+}
+#controls button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Inputs */
+    #controls input[type="number"],
+    #controls input[type="range"] {
+    padding: 6px 8px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-size: 0.9rem;
+}
+
+/* ============================= */
+/*     Grid Container            */
+/* ============================= */
+#gridContainer {
+    display: grid;
+    gap: var(--gap);
+    width: 600px;
+    height: 600px;
+    background: var(--bg-panel);
+    box-shadow: var(--shadow-md);
+    border-radius: var(--radius);
+    overflow: hidden;
+}
+
+/* ============================= */
+/*    Grid Cells Styling         */
+/* ============================= */
+.cell {
+    width: 100%;
+    height: 100%;
+    background: var(--bg-cell);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: var(--fg-default);
+    transition: background 0.2s;
+}
+
+.cell:hover {
+    background: #dbe2ec;
+}
+
+.cell.wall       { background: var(--bg-wall);       cursor: not-allowed; }
+.cell.visited    { background: var(--bg-visited);    }
+.cell.path       { background: var(--bg-path);       }
+.cell.start      { background: var(--bg-start);      cursor: grab; }
+.cell.end        { background: var(--bg-end);        cursor: grab; }
+.cell.drag-over  { outline: 2px dashed var(--fg-default); }
+
+/* ============================= */
+/*    Responsiveness             */
+/* ============================= */
+@media(max-width: 700px) {
+    #gridContainer {
+        width: 90vw;
+        height: 90vw;
+    }
+}

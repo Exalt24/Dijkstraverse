@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pathfinding Visualizer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A visualizer for pathfinding algorithms." />
+    <meta name="author" content="Daniel Alexis Cruz" />
+    <meta name="keywords" content="pathfinding, visualizer, algorithms, maze, grid" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div id="controls">
+    <label>
+      Speed:
+      <input id="speedControl" type="range" min="10" max="200" value="100" />
+    </label>
+    <label>
+      Grid size:
+      <input id="gridSizeInput" type="number" min="10" max="50" value="10" />
+    </label>
+    <button id="findPathBtn">▶️ Find Path</button>
+    <button id="mazeBtn">🌀 Generate Maze</button>
+    <button id="resetBtn">🔄 Reset Grid</button>
+    <button id="randWeightsBtn">🎲 Random Weights</button>
+    <button id="saveBtn">💾 Save Grid</button>
+    <button id="loadBtn">📂 Load Grid</button>
+  </div>
+  <div id="gridContainer"></div>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
