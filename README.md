@@ -12,7 +12,11 @@
 
 A lightweight, high-performance web application built with vanilla JavaScript that visualizes Dijkstra's pathfinding algorithm on a customizable grid. This interactive tool allows users to create obstacles, place start/end points, adjust traversal costs, and observe the algorithm's exploration and path-finding processes in real-time.
 
+<div align="center">
+
 ![Pathfinding Visualizer Demo](docs/demo.gif)
+
+</div>
 
 ## 📋 Table of Contents
 
