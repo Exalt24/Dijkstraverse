@@ -2,31 +2,74 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Pathfinding Visualizer</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="A visualizer for pathfinding algorithms." />
-    <meta name="author" content="Daniel Alexis Cruz" />
-    <meta name="keywords" content="pathfinding, visualizer, algorithms, maze, grid" />
+  <title>Dijkstraverse</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A pathfinding visualizer that uses Dijkstra's algorithm to find the shortest path in a grid. You can interactively set start and end points, add walls, and visualize the algorithm's progress." />
+  <meta name="author" content="Daniel Alexis Cruz" />
+  <meta name="keywords" content="pathfinding, algorithm, visualization, Dijkstra, grid, walls, weights" />
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
+  <header>
+    <h1>Dijkstraverse</h1>
+  </header>
+
   <div id="controls">
-    <label>
-      Speed:
-      <input id="speedControl" type="range" min="10" max="200" value="100" />
-    </label>
-    <label>
-      Grid size:
-      <input id="gridSizeInput" type="number" min="10" max="50" value="10" />
-    </label>
-    <button id="findPathBtn">▶️ Find Path</button>
-    <button id="mazeBtn">🌀 Generate Maze</button>
-    <button id="resetBtn">🔄 Reset Grid</button>
-    <button id="randWeightsBtn">🎲 Random Weights</button>
-    <button id="saveBtn">💾 Save Grid</button>
-    <button id="loadBtn">📂 Load Grid</button>
+    <div class="control-group">
+      <div class="group-label">Grid & Speed</div>
+      <label>Size:
+        <input id="gridSizeInput" type="number" min="10" max="50" value="10" />
+      </label>
+      <label>Speed:
+        <input id="speedControl" type="range" min="10" max="200" value="100" />
+      </label>
+      <button id="resetBtn">🔄 Reset Grid</button>
+    </div>
+
+    <div class="control-group">
+      <div class="group-label">Randomizers</div>
+      <button id="randomBtn">🔀 Random Start/End</button>
+      <button id="randWeightsBtn">⚖️ Random Weights</button>
+      <button id="randomWallsBtn">🧱 Random Walls</button>
+    </div>
+
+    <div class="control-group">
+      <div class="group-label">Maze & Save/Load</div>
+      <button id="mazeBtn">🌀 Generate Maze</button>
+      <button id="saveBtn">💾 Save Grid</button>
+      <button id="loadBtn">📂 Load Grid</button>
+    </div>
+
+    <button id="findPathBtn" class="primary-btn">▶️ Find Path</button>
   </div>
-  <div id="gridContainer"></div>
+
+  <div id="main">
+    <aside class="panel instructions">
+      <h2>How to Use</h2>
+      <ul>
+        <li><span class="icon">🖱️</span>Click any empty cell to toggle a wall.</li>
+        <li><span class="icon">🎯</span>Drag the green (start) and red (end) cells—only onto non-wall cells.</li>
+        <li><span class="icon">▶️</span>Hit "Find Path" to see the algorithm in action.</li>
+        <li><span class="icon">⚖️</span>Use randomizers to shuffle start/end, walls, or weights.</li>
+        <li><span class="icon">🌀</span>Generate a maze or save/load your layout.</li>
+      </ul>
+    </aside>
+
+    <div id="gridContainer"></div>
+
+    <aside class="panel legend">
+      <h2>Legend</h2>
+      <ul>
+        <li><span class="cell start"></span>Start</li>
+        <li><span class="cell end"></span>End</li>
+        <li><span class="cell wall"></span>Wall</li>
+        <li><span class="cell visited"></span>Visited</li>
+        <li><span class="cell path"></span>Path</li>
+        <li><span class="cell weight">N</span>Node weight</li>
+      </ul>
+    </aside>
+  </div>
+
   <script type="module" src="js/main.js"></script>
 </body>
 </html>
