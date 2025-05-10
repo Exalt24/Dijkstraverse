@@ -44,7 +44,6 @@ drawGrid();
 
 grid.reset = grid.reset.bind(grid);
 
-// drag & drop start/end
 let dragging = null;
 container.addEventListener('mousedown', e => {
   if (!e.target.classList.contains('cell')) return;
@@ -71,7 +70,6 @@ container.addEventListener('mouseout', e => {
     e.target.classList.remove('drag-over');
 });
 
-// toggle walls & weights
 container.addEventListener('click', e => {
   if (!e.target.classList.contains('cell') || dragging) return;
   const x = +e.target.dataset.x, y = +e.target.dataset.y;
@@ -88,7 +86,6 @@ container.addEventListener('contextmenu', e => {
   drawGrid();
 });
 
-// dynamic resizing
 sizeInput.addEventListener('input', () => {
   if (isFinding) return;
   if (sizeInput.value < 10){
@@ -107,21 +104,18 @@ sizeInput.addEventListener('input', () => {
   drawGrid();
 });
 
-// speed control logic
 const minD = +speedInput.min, maxD = +speedInput.max;
 let delay;
 function updateDelay() { delay = maxD + minD - +speedInput.value; }
 speedInput.addEventListener('input', updateDelay);
 updateDelay();
 
-// -- Maze generator button --
 mazeBtn.addEventListener('click', () => {
     if (isFinding) return;
     MazeGenerator.generate(grid, start, end);
     drawGrid();
 });
 
-// reset grid button
 resetBtn.addEventListener('click', () => {
   if (isFinding) return;
   const sz = grid.cols;
@@ -133,7 +127,6 @@ resetBtn.addEventListener('click', () => {
   drawGrid();
 });
 
-// save/load
 function serialize() {
   return {
     size: grid.cols,
