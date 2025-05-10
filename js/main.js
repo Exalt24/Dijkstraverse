@@ -1,10 +1,14 @@
 import { Grid }    from './grid.js';
 import { Dijkstra } from './algorithm.js';
 import { MazeGenerator } from './maze.js';
+import { isReachable } from './reachable.js';
 
 const container  = document.getElementById('gridContainer');
 const findBtn    = document.getElementById('findPathBtn');
 const resetBtn   = document.getElementById('resetBtn');
+const randomBtn = document.getElementById('randomBtn');
+const randomWeightsBtn = document.getElementById('randWeightsBtn');
+const randomWallsBtn = document.getElementById('randomWallsBtn');
 const mazeBtn    = document.getElementById('mazeBtn');
 const sizeInput  = document.getElementById('gridSizeInput');
 const speedInput = document.getElementById('speedControl');
@@ -53,21 +57,25 @@ container.addEventListener('mousedown', e => {
 document.addEventListener('mouseup', e => {
   if (!dragging) return;
   const el = document.elementFromPoint(e.clientX, e.clientY);
-  if (el?.classList.contains('cell')) {
+  if (el?.classList.contains('cell') && !el.classList.contains('wall')) {
     const x = +el.dataset.x, y = +el.dataset.y;
-    if (dragging === 'start') start = grid.getNode(x,y);
-    else                      end   = grid.getNode(x,y);
+    if (dragging === 'start') start = grid.getNode(x, y);
+    else                       end   = grid.getNode(x, y);
     drawGrid();
   }
   dragging = null;
 });
 container.addEventListener('mouseover', e => {
-  if (dragging && e.target.classList.contains('cell'))
-    e.target.classList.add('drag-over');
+  const cell = e.target;
+  if (dragging && cell.classList.contains('cell') && !cell.classList.contains('wall')) {
+    cell.classList.add('drag-over');
+  }
 });
 container.addEventListener('mouseout', e => {
-  if (e.target.classList.contains('cell'))
-    e.target.classList.remove('drag-over');
+  const cell = e.target;
+  if (cell.classList.contains('cell')) {
+    cell.classList.remove('drag-over');
+  }
 });
 
 container.addEventListener('click', e => {
@@ -128,6 +136,8 @@ resetBtn.addEventListener('click', () => {
 });
 
 function serialize() {
+  if (isFinding) return;
+
   return {
     size: grid.cols,
     start: { x:start.x, y:start.y },
@@ -137,6 +147,8 @@ function serialize() {
   };
 }
 function deserialize(d) {
+  if (isFinding) return;
+
   grid = new Grid(d.size,d.size);
   start = grid.getNode(d.start.x,d.start.y);
   end   = grid.getNode(d.end.x,d.end.y);
@@ -150,9 +162,64 @@ function deserialize(d) {
 saveBtn.addEventListener('click', () => localStorage.setItem('pfState', JSON.stringify(serialize())));
 loadBtn.addEventListener('click', () => { const j = localStorage.getItem('pfState'); if(j) deserialize(JSON.parse(j)); });
 
+randomBtn.addEventListener('click', () => {
+  if (isFinding) return;
+
+  const openCells = grid.nodes.flat().filter(n => !n.isWall);
+
+  const i = Math.floor(Math.random() * openCells.length);
+  let j;
+  do {
+    j = Math.floor(Math.random() * openCells.length);
+  } while (j === i);
+
+  start = openCells[i];
+  end   = openCells[j];
+  drawGrid();
+});
+
+randomWeightsBtn.addEventListener('click', () => {
+    if (isFinding) return;
+
+    grid.nodes.flat().forEach(n => {
+      if (n !== start && n !== end) {
+        n.weight = Math.floor(Math.random()*9) + 1;
+      }
+    });
+    drawGrid();
+});
+
+randomWallsBtn.addEventListener('click', () => {
+  if (isFinding) return;
+
+  grid.nodes.flat().forEach(n => n.isWall = false);
+
+  const candidates = grid.nodes.flat().filter(n => n !== start && n !== end);
+  for (let i = candidates.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [candidates[i], candidates[j]] = [candidates[j], candidates[i]];
+  }
+
+  const density = 0.3;
+  const target = Math.floor(candidates.length * density);
+  let placed = 0;
+
+  for (const cell of candidates) {
+    if (placed >= target) break;
+    cell.isWall = true;
+    if (isReachable(start, end, grid)) {
+      placed++;
+    } else {
+      cell.isWall = false;
+    }
+  }
+
+  drawGrid();
+});
+
 findBtn.addEventListener('click', async () => {
   isFinding = true;
-  sizeInput.disabled = true; findBtn.disabled = true; resetBtn.disabled = true;
+  sizeInput.disabled = true; findBtn.disabled = true; resetBtn.disabled = true; randomBtn.disabled = true; mazeBtn.disabled = true; randomWeightsBtn.disabled = true; saveBtn.disabled = true; loadBtn.disabled = true; randomWallsBtn.disabled = true;
   grid.reset(); drawGrid();
   await Dijkstra.findPath(
     grid, start, end,
@@ -161,14 +228,5 @@ findBtn.addEventListener('click', async () => {
     () => delay
   );
   isFinding = false;
-  sizeInput.disabled = false; findBtn.disabled = false; resetBtn.disabled = false;
-});
-
-document.getElementById('randWeightsBtn').addEventListener('click', () => {
-    grid.nodes.flat().forEach(n => {
-      if (n !== start && n !== end) {
-        n.weight = Math.floor(Math.random()*9) + 1;
-      }
-    });
-    drawGrid();
+  sizeInput.disabled = false; findBtn.disabled = false; resetBtn.disabled = false; randomBtn.disabled = false; mazeBtn.disabled = false; randomWeightsBtn.disabled = false; saveBtn.disabled = false; loadBtn.disabled = false; randomWallsBtn.disabled = false;
 });

@@ -6,20 +6,19 @@
 [![JavaScript](https://img.shields.io/badge/JavaScript-ES6-yellow.svg)](https://www.ecma-international.org/ecma-262/6.0/)
 [![HTML5](https://img.shields.io/badge/HTML-5-orange.svg)](https://html.spec.whatwg.org/)
 [![CSS3](https://img.shields.io/badge/CSS-3-blue.svg)](https://www.w3.org/Style/CSS/)
-[![GitHub](https://img.shields.io/badge/GitHub-Exalt24-lightgrey.svg)](https://github.com/Exalt24/PathfindingVisualizer)
-  
+[![GitHub](https://img.shields.io/badge/GitHub-Exalt24-lightgrey.svg)](https://github.com/Exalt24/Dijkstraverse)
+
 </div>
 
-A lightweight, high-performance web application built with vanilla JavaScript that visualizes Dijkstra's pathfinding algorithm on a customizable grid. This interactive tool allows users to create obstacles, place start/end points, adjust traversal costs, and observe the algorithm's exploration and path-finding processes in real-time.
+<p align="center">An interactive pathfinding algorithm visualizer built with vanilla JavaScript. Explore how Dijkstra's algorithm searches for the shortest path on a customizable grid with obstacles, weighted nodes, and procedurally generated mazes.</p>
 
 <div align="center">
-
-![Pathfinding Visualizer Demo](docs/demo.gif)
-
+  <img src="docs/demo.gif" alt="Dijkstraverse Demo" width="700" />
 </div>
 
 ## 📋 Table of Contents
 
+- [Overview](#-overview)
 - [Features](#-features)
 - [Live Demo](#-live-demo)
 - [Getting Started](#-getting-started)
@@ -27,136 +26,126 @@ A lightweight, high-performance web application built with vanilla JavaScript th
   - [Installation](#installation)
   - [Running Locally](#running-locally)
 - [Usage Guide](#️-usage-guide)
-  - [Grid Interactions](#grid-interactions)
-  - [Visualization Controls](#visualization-controls)
-  - [Advanced Features](#advanced-features)
-  - [State Management](#state-management)
 - [Project Architecture](#-project-architecture)
 - [Algorithm Implementation](#-algorithm-implementation)
 - [Customization Options](#-customization-options)
 - [Contributing](#-contributing)
 - [License](#-license)
 
-## 🚀 Features
+## 🔍 Overview
 
-- **Interactive Grid System**
-  - Flexible dimensions from 10×10 (default) up to 50×50
-  - Intuitive wall creation with left-click
-  - Drag-and-drop functionality for start/end points
+Dijkstraverse is a lightweight, high-performance web application that visualizes Dijkstra's pathfinding algorithm on an interactive grid. The application demonstrates how the algorithm explores nodes, evaluates distances, and ultimately discovers the shortest path between two points, even when navigating through obstacles and areas with varying traversal costs.
 
-- **Advanced Pathfinding**
-  - Optimized Dijkstra's algorithm implementation (O(N log N) via min-heap)
-  - Smooth, animated visualization of exploration process
-  - Real-time path discovery highlighting
+Built entirely with vanilla JavaScript, HTML5, and CSS3, Dijkstraverse offers an educational and engaging way to understand graph search algorithms without any framework dependencies.
 
-- **Powerful Customization**
-  - Dynamic grid resizing without page reload
-  - Adjustable visualization speed via intuitive slider
-  - Weighted nodes system (1-9 scale) with visual indicators
+## ✨ Features
 
-- **Procedural Generation**
-  - One-click perfect maze generation
-  - Random weight distribution option
-  - Guaranteed start-to-end reachability
+### Interactive Grid System
+- **Customizable dimensions** from 10×10 up to 50×50
+- **Drag-and-drop functionality** for start and end markers
+- **Wall creation and removal** with intuitive click controls
+- **Variable node weights** (1-9) to simulate different traversal costs
 
-- **State Persistence**
-  - Local storage integration for saving grid configurations
-  - Complete state restoration (walls, weights, markers)
-  - One-click reset functionality
+### Advanced Pathfinding Visualization
+- **Optimized Dijkstra's algorithm** implementation using a binary min-heap
+- **Real-time animation** showing node exploration sequence
+- **Highlighted shortest path** once destination is reached
+- **Performance metrics** displaying nodes visited and path length
+
+### Customization Options
+- **Dynamic grid resizing** without page reload
+- **Adjustable animation speed** from step-by-step to instant
+- **Visual indicators** for different node types and states
+
+### Procedural Generation Tools
+- **Perfect maze generation** using recursive backtracking
+- **Random wall placement** with guaranteed path existence
+- **Random weight assignment** for testing weighted pathfinding
+- **Random start/end positioning** for varied scenarios
+
+### State Management
+- **Local storage integration** for saving grid configurations
+- **Configuration restoration** for walls, weights, and markers
+- **Quick reset functionality** to default or custom states
 
 ## 🌐 Live Demo
 
-Experience the pathfinding visualizer in action: [Live Demo](#) *(Coming soon)*
+Experience the visualizer in action: [Live Demo](https://dijkstraverse.vercel.app)
 
 ## 🛠 Getting Started
 
 ### Prerequisites
-
-- Modern web browser with ES6 support (Chrome, Firefox, Safari, Edge)
-- Basic HTTP server for local development (optional)
+- Modern web browser with ES6 support
+- Optional: Simple HTTP server for local development
 
 ### Installation
 
-1. **Clone the repository**
-
-   ```bash
-   git clone https://github.com/Exalt24/Dijkstraverse.git
-   cd pathfinding-visualizer
-   ```
-
-2. **Serve the project files**
-
-   Using Python's built-in HTTP server:
-   ```bash
-   python -m http.server 8000
-   ```
-
-   Or with Node.js:
-   ```bash
-   npx serve
-   ```
-
-3. **Access the application**
-
-   Open your browser and navigate to:
-   ```
-   http://localhost:8000
-   ```
+```bash
+git clone https://github.com/Exalt24/Dijkstraverse.git
+cd Dijkstraverse
+```
 
 ### Running Locally
 
-No build process or compilation required! The application uses native ES modules (`type="module"`) for clean code organization.
+#### Option 1: Using Python's HTTP Server
 
-**Quick Start - Direct HTML Opening**
+```bash
+python -m http.server 8000
+```
 
-You can also simply open the HTML file directly in your browser:
+Then navigate to `http://localhost:8000` in your browser.
 
-1. Download the repository (clone or download ZIP)
-2. Extract files if necessary
-3. Double-click on `index.html` to open in your default browser
+#### Option 2: Using Node.js
 
-> **Note:** Opening directly may limit some features if using ES modules due to CORS policies. If you encounter issues, use the HTTP server method above.
+```bash
+npx serve
+```
+
+Then navigate to the URL provided in the terminal.
+
+#### Option 3: Direct File Opening
+
+Simply open the `index.html` file in your browser.
+
+> **Note:** If you encounter CORS issues with ES modules when opening the file directly, please use one of the server methods above.
 
 ## ⚙️ Usage Guide
 
 ### Grid Interactions
+- **Left-click** on an empty cell to create or remove a wall
+- **Right-click** on a non-wall cell to cycle through weight values (1-9)
+- **Click and drag** the start (green) or end (red) markers to reposition them
 
-- **Left-click**: Toggle walls (impassable obstacles)
-- **Right-click**: Cycle through weight values (1-9)
-- **Drag**: Reposition start (green) and target (red) markers
-- **Find Path**: Execute the algorithm to discover the optimal route
+### Control Panel
+- **Find Path**: Initiates the pathfinding algorithm
+- **Speed Slider**: Adjusts the visualization speed
+- **Grid Size**: Changes the grid dimensions
+- **Reset Grid**: Clears all walls, weights, and visualization
 
-### Visualization Controls
+### Randomization Tools
+- **Generate Maze**: Creates a perfect maze using recursive backtracking
+- **Random Walls**: Places walls randomly while ensuring path existence
+- **Random Weights**: Assigns random weights to non-wall cells
+- **Random Start/End**: Repositions start and end markers randomly
 
-- **Speed Slider**: Adjust animation pacing from detailed (slow) to instant (fast)
-- **Grid Size**: Modify dimensions from 5×5 up to 50×50 cells
-- **Clear Path**: Remove visualization while preserving obstacles
-
-### Advanced Features
-
-- **Generate Maze** (🌀): Create perfect mazes using recursive backtracking
-- **Random Weights** (🎲): Assign varied traversal costs to empty cells
-- **Weight System**: Higher values (1-9) represent more difficult terrain
-
-### State Management
-
-- **Save Grid**: Persist current configuration to browser storage
-- **Load Grid**: Restore previously saved setup
-- **Reset Grid** (🔄): Clear all obstacles and return to initial state
+### Persistence
+- **Save Grid**: Stores the current configuration in local storage
+- **Load Grid**: Restores the previously saved configuration
 
 ## 📁 Project Architecture
 
 ```
-pathfinding-visualizer/
-├── index.html              # Main application entry point
+Dijkstraverse/
+├── index.html              # Main entry point and HTML structure
 ├── css/
-│   └── styles.css          # Styling and animations
+│   └── styles.css          # Visual styling and animations
 ├── js/
+│   ├── heap.js             # Binary min-heap implementation
 │   ├── node.js             # Grid cell representation
-│   ├── heap.js             # Priority queue implementation
 │   ├── grid.js             # Grid management and rendering
 │   ├── algorithm.js        # Dijkstra's algorithm implementation
 │   ├── maze.js             # Procedural maze generation
+│   ├── reachable.js        # Path existence verification
 │   └── main.js             # Application initialization and UI binding
 └── docs/
     └── demo.gif            # Demo animation for documentation
@@ -164,22 +153,32 @@ pathfinding-visualizer/
 
 ## ⚡ Algorithm Implementation
 
-The application implements **Dijkstra's algorithm** with several performance optimizations:
+Dijkstraverse implements Dijkstra's algorithm with several optimizations:
 
-- **Binary Min-Heap**: Efficient priority queue reduces time complexity to O(N log N)
-- **State Caching**: Precomputed neighbor relationships minimize redundant calculations
-- **Lazy Rendering**: Updates DOM efficiently with batched operations
-- **Dynamic Timing**: Adaptive animation speed via real-time `getDelay()` callbacks
+- **Binary Min-Heap Priority Queue**: Reduces time complexity to O(N log N)
+- **Neighbor Caching**: Precomputes adjacent nodes to avoid repeated boundary checks
+- **Asynchronous Animation**: Uses Promise-based delays for smooth visualization
+- **Early Termination**: Stops exploration once the target is found
+- **Weighted Path Calculation**: Accounts for variable traversal costs
+
+The visualization process:
+1. Initialize distances (0 for start, infinity for others)
+2. Add unvisited nodes to the priority queue
+3. Process the closest unvisited node
+4. Update distances to its neighbors
+5. Mark the node as visited
+6. Repeat until the target is found or no path exists
+7. Reconstruct and highlight the shortest path
 
 ## 🔧 Customization Options
 
-Extend the visualizer with these potential modifications:
+Dijkstraverse can be extended with the following modifications:
 
 - **Alternative Algorithms**: Implement A* by adding a distance heuristic
-- **Visual Themes**: Customize the appearance via CSS variables
-- **Movement Patterns**: Add support for diagonal movement
-- **Multi-Target Pathfinding**: Extend to support multiple destinations
+- **Additional Movement Patterns**: Enable diagonal movement for 8-directional search
+- **Visual Themes**: Customize the appearance through CSS variables
 - **Export/Import**: Add functionality to save/load configurations as files
+- **Multi-Target Pathfinding**: Extend to support multiple destinations
 
 ## 🤝 Contributing
 
@@ -187,8 +186,8 @@ Contributions are welcome! To contribute:
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit changes (`git commit -m 'Add amazing feature'`)
-4. Push to branch (`git push origin feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
 ## 📄 License
@@ -198,6 +197,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 <div align="center">
-  <p>Built with ❤️ by <a href="https://github.com/Exalt24">Exalt24</a></p>
-  <p>Star ⭐ this repository if you found it useful!</p>
+  <p>Developed by <a href="https://github.com/Exalt24">Exalt24</a></p>
+  <p><i>If you found this project helpful, please consider giving it a star ⭐</i></p>
 </div>
