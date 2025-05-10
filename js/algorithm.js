@@ -27,7 +27,6 @@ export class Dijkstra {
       await new Promise(res => setTimeout(res, getDelay()));
     }
 
-    // Backtrack
     const path = [];
     for (let p = end; p; p = p.previous) path.push(p);
     path.reverse();

@@ -26,9 +26,7 @@ export class MazeGenerator {
       }
     }
 
-    // ensure endNode is open
     endNode.isWall = false;
-    // guarantee at least one neighbor is open
     const reachable = endNode.neighbors.some(n => !n.isWall);
     if (!reachable) {
       const choice = endNode.neighbors[Math.floor(Math.random() * endNode.neighbors.length)];
