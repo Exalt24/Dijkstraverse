@@ -1,6 +1,12 @@
 # Dijkstraverse
 
 <div align="center">
+  <img src="docs/demo.gif" alt="Dijkstraverse Demo" width="700" />
+</div>
+
+<p align="center"><em>Dijkstra's algorithm expanding across a weighted grid with walls, then tracing the shortest path.</em></p>
+
+<div align="center">
   
 [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![JavaScript](https://img.shields.io/badge/JavaScript-ES6-yellow.svg)](https://www.ecma-international.org/ecma-262/6.0/)
@@ -11,10 +17,6 @@
 </div>
 
 <p align="center">An interactive pathfinding algorithm visualizer built with vanilla JavaScript. Explore how Dijkstra's algorithm searches for the shortest path on a customizable grid with obstacles, weighted nodes, and procedurally generated mazes.</p>
-
-<div align="center">
-  <img src="docs/demo.gif" alt="Dijkstraverse Demo" width="700" />
-</div>
 
 ## 📋 Table of Contents
 
